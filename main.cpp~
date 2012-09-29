@@ -1,0 +1,42 @@
+#include <GL/glut.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <stdio.h>
+#include <math.h>
+#define PI 3.14159265
+
+double toRad(double t)
+{
+  return t/180*PI;
+}
+void testCircle(double ox, double oy)
+{
+  int a;
+  glBegin(GL_POLYGON);
+  for(a = 0; a < 360 ; a++)
+    {
+      glVertex2f(ox+cos(a),oy+sin(a));
+    }
+  glEnd();
+}
+
+void myDisplay(){
+
+    glClear(GL_COLOR_BUFFER_BIT);
+    glMatrixMode(GL_MODELVIEW);
+    glClearColor(0,0,0,1);
+
+    glLoadIdentity();
+    testCircle(0,0);
+    glFlush();
+}
+
+int main(int argc, char* args[] )
+{
+    glutInit(&argc,args);
+    glutInitWindowSize (600, 600);
+    glutCreateWindow("bla");
+    
+    glutDisplayFunc(myDisplay);
+    glutMainLoop();
+}
